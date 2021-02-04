@@ -8,13 +8,15 @@ The code has been tested on Jetson Nano with JetPack 4.4.1.
 ## Setup
 Default build without internal logging
 ```
-$ make
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make -j 4
 $ ./test_ICM20948 -l 2000 -c 1
 ```
-Build with internal logging
+To build with additional logging, pass -DLOG=1 to cmake like:
 ```
-$ CXX_FLAGS=-DLOG=1 make
-$ ./test_ICM20948 -l 2000 -c 1
+$ cmake .. -DLOG=1
 ```
 
 ## Credit
