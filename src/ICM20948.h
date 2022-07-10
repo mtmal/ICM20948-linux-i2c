@@ -24,6 +24,7 @@
 #define ICM20948_H_
 
 #include <cstdint>
+#include <I2C.h>
 #include "IMUData.h"
 
 class ICM20948
@@ -305,28 +306,6 @@ private:
 	bool checkMag() const;
 
 	/**
-	 * Reads a byte from the device.
-	 *  @param regAddr the address of the register to read.
-	 *  @return the read data. If failed, zero is returned (it also might be a correct value!).
-	 */
-	uint8_t readByte(const uint8_t regAddr) const;
-
-	/**
-	 * Reads multiple bytes from the device.
-	 *  @param regAddr the address of the register from which the read should begin.
-	 *  @param length the number of bytes to read (the length of @p data).
-	 *  @param[out] data preallocated buffer for read data.
-	 */
-	void readNBytes(const uint8_t regAddr, const uint8_t length, uint8_t* data) const;
-
-	/**
-	 * Writes a byte to the device.
-	 *  @param regAddr the address of the register to write new data.
-	 *  @param value a new data to upload to the device.
-	 */
-	void writeByte(const uint8_t regAddr, const uint8_t value) const;
-
-	/**
 	 * Reads data from AK09916 sensor.
 	 *  @param regAddr the address of the register from which the read should begin.
 	 *  @param length the number of bytes to read (the length of @p data).
@@ -345,8 +324,6 @@ private:
 	mutable ICM_BANK mCurrentBank;
 	/** IMU configuration. */
 	Config mConfig;
-	/** ID of serial device for I2C communication. */
-	int mSerial;
 	/** Scale for gyroscope - depends on configuration. */
 	float mGyroScale;
 	/** Scale for accelerometer - depends on configuration. */
@@ -355,6 +332,8 @@ private:
 	IMUData mData;
 	/** Preallocated buffer for raw IMU data. */
 	uint8_t mRawDataBuf[22];
+	/** Class for controlling I2C communication. */
+	I2C mI2C;
 };
 
 #endif /* ICM20948_H_ */
