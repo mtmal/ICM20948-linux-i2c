@@ -181,7 +181,7 @@ public:
 		/** The frame rate in which data will be processed for AHRS. */
 		float mFramerate;
 
-		Config() : mDevice("/dev/i2c-0"), mGyro(), mAcc(), mTemp(), mMagEnabled(true), mAHRS(MADGWICK), mFramerate(100.0f) {};
+		Config() : mDevice("/dev/i2c-1"), mGyro(), mAcc(), mTemp(), mMagEnabled(true), mAHRS(MADGWICK), mFramerate(100.0f) {};
 	};
 
 	/**
