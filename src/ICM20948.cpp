@@ -548,9 +548,9 @@ void ICM20948::readRawGyro(int16_t gyro[3]) const
     uint8_t u8Buf[GYRO_AND_ACC_DATA_LEN];
 	setBank(BANK_0);
     mI2C.readNBytes(I2C_ADD_ICM20948, REG_ADD_GYRO_XOUT_H, GYRO_AND_ACC_DATA_LEN, u8Buf);
-    gyro[0] = (static_cast<int16_t>(u8Buf[0]) << 8) | static_cast<int16_t>(u8Buf[1]);
-    gyro[1] = (static_cast<int16_t>(u8Buf[2]) << 8) | static_cast<int16_t>(u8Buf[3]);
-    gyro[2] = (static_cast<int16_t>(u8Buf[4]) << 8) | static_cast<int16_t>(u8Buf[5]);
+    gyro[0] = static_cast<int16_t>((u8Buf[0] << 8) | u8Buf[1]);
+    gyro[1] = static_cast<int16_t>((u8Buf[2] << 8) | u8Buf[3]);
+    gyro[2] = static_cast<int16_t>((u8Buf[4] << 8) | u8Buf[5]);
 }
 
 void ICM20948::readRawAcc(int16_t acc[3]) const
@@ -558,9 +558,9 @@ void ICM20948::readRawAcc(int16_t acc[3]) const
     uint8_t u8Buf[GYRO_AND_ACC_DATA_LEN];
 	setBank(BANK_0);
     mI2C.readNBytes(I2C_ADD_ICM20948, REG_ADD_ACCEL_XOUT_H, GYRO_AND_ACC_DATA_LEN, u8Buf);
-    acc[0] = (static_cast<int16_t>(u8Buf[0]) << 8) | static_cast<int16_t>(u8Buf[1]);
-    acc[1] = (static_cast<int16_t>(u8Buf[2]) << 8) | static_cast<int16_t>(u8Buf[3]);
-    acc[2] = (static_cast<int16_t>(u8Buf[4]) << 8) | static_cast<int16_t>(u8Buf[5]);
+    acc[0] = static_cast<int16_t>((u8Buf[0] << 8) | u8Buf[1]);
+    acc[1] = static_cast<int16_t>((u8Buf[2] << 8) | u8Buf[3]);
+    acc[2] = static_cast<int16_t>((u8Buf[4] << 8) | u8Buf[5]);
 }
 
 bool ICM20948::readRawMag(int16_t mag[3]) const
@@ -568,9 +568,9 @@ bool ICM20948::readRawMag(int16_t mag[3]) const
     uint8_t u8Buf[MAG_DATA_LEN];
 	setBank(BANK_0);
     mI2C.readNBytes(I2C_ADD_ICM20948, REG_ADD_EXT_SENS_DATA_00, MAG_DATA_LEN, u8Buf);
-    mag[0] =  (static_cast<int16_t>(u8Buf[1]) << 8) | static_cast<int16_t>(u8Buf[0]);
-    mag[1] =-((static_cast<int16_t>(u8Buf[3]) << 8) | static_cast<int16_t>(u8Buf[2]));
-    mag[2] =-((static_cast<int16_t>(u8Buf[5]) << 8) | static_cast<int16_t>(u8Buf[4]));
+    mag[0] =  static_cast<int16_t>((u8Buf[1] << 8) | u8Buf[0]);
+    mag[1] =-(static_cast<int16_t>((u8Buf[3] << 8) | u8Buf[2]));
+    mag[2] =-(static_cast<int16_t>((u8Buf[5] << 8) | u8Buf[4]));
     /* Check if there was an overflow. */
     return (u8Buf[7] & 0x08);
 }
@@ -589,22 +589,22 @@ bool ICM20948::readAllRawDAta(int16_t gyro[3], int16_t acc[3], int16_t mag[3], i
     mI2C.readNBytes(I2C_ADD_ICM20948, REG_ADD_ACCEL_XOUT_H, IMU_DATA_LEN, mRawDataBuf);
 
     /* Parse accelerometer data */
-    acc[0]  =  (static_cast<int16_t>(mRawDataBuf[ 0]) << 8) | static_cast<int16_t>(mRawDataBuf[ 1]);
-    acc[1]  =  (static_cast<int16_t>(mRawDataBuf[ 2]) << 8) | static_cast<int16_t>(mRawDataBuf[ 3]);
-    acc[2]  =  (static_cast<int16_t>(mRawDataBuf[ 4]) << 8) | static_cast<int16_t>(mRawDataBuf[ 5]);
+    acc[0]  =  static_cast<int16_t>((mRawDataBuf[ 0] << 8) | mRawDataBuf[ 1]);
+    acc[1]  =  static_cast<int16_t>((mRawDataBuf[ 2] << 8) | mRawDataBuf[ 3]);
+    acc[2]  =  static_cast<int16_t>((mRawDataBuf[ 4] << 8) | mRawDataBuf[ 5]);
 
     /* Parse gyroscope data */
-    gyro[0] =  (static_cast<int16_t>(mRawDataBuf[ 6]) << 8) | static_cast<int16_t>(mRawDataBuf[ 7]);
-    gyro[1] =  (static_cast<int16_t>(mRawDataBuf[ 8]) << 8) | static_cast<int16_t>(mRawDataBuf[ 9]);
-    gyro[2] =  (static_cast<int16_t>(mRawDataBuf[10]) << 8) | static_cast<int16_t>(mRawDataBuf[11]);
+    gyro[0] =  static_cast<int16_t>((mRawDataBuf[ 6] << 8) | mRawDataBuf[ 7]);
+    gyro[1] =  static_cast<int16_t>((mRawDataBuf[ 8] << 8) | mRawDataBuf[ 9]);
+    gyro[2] =  static_cast<int16_t>((mRawDataBuf[10] << 8) | mRawDataBuf[11]);
 
     /* Parse temperature data */
-    temp 	=  (static_cast<int16_t>(mRawDataBuf[12]) << 8) | static_cast<int16_t>(mRawDataBuf[13]);
+    temp 	=  static_cast<int16_t>((mRawDataBuf[12] << 8) | mRawDataBuf[13]);
 
     /* Parse magnetic data */
-    mag[0]  =  (static_cast<int16_t>(mRawDataBuf[15]) << 8) | static_cast<int16_t>(mRawDataBuf[14]);
-    mag[1]  =-((static_cast<int16_t>(mRawDataBuf[17]) << 8) | static_cast<int16_t>(mRawDataBuf[16]));
-    mag[2]  =-((static_cast<int16_t>(mRawDataBuf[19]) << 8) | static_cast<int16_t>(mRawDataBuf[18]));
+    mag[0]  =  static_cast<int16_t>((mRawDataBuf[15] << 8) | mRawDataBuf[14]);
+    mag[1]  =-(static_cast<int16_t>((mRawDataBuf[17] << 8) | mRawDataBuf[16]));
+    mag[2]  =-(static_cast<int16_t>((mRawDataBuf[19] << 8) | mRawDataBuf[18]));
 
     return !(mRawDataBuf[21] & 0x08);
 }
