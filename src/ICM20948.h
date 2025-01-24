@@ -76,7 +76,7 @@ public:
 		 * Initialise configuration structure with default values.
 		 */
 		AccConfig() : mEnabled(true), mRange(ACC_RANGE_2G), mDLPFBandwidth(ACC_DLPF_BANDWIDTH_6HZ),
-						  mAveraging(ACC_AVERAGING_NONE), mSampleRateDivisor(4) {};
+						  mAveraging(ACC_AVERAGING_4X), mSampleRateDivisor(4) {};
 	};
 
   	enum GYRO_RANGE
