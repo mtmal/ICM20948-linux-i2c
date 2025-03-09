@@ -10,10 +10,10 @@
 // 02/10/2011	SOH Madgwick	Optimised for reduced CPU load
 //
 //=====================================================================================================
-#ifndef MadgwickAHRS_h
-#define MadgwickAHRS_h
+#pragma once
 
-#include "IMUData.h"
+
+#include "imu_data.h"
 
 //---------------------------------------------------------------------------------------------------
 // Function declarations
@@ -21,7 +21,6 @@
 void MadgwickAHRSupdate(IMUData& data);
 void MadgwickAHRSupdateIMU(IMUData& data);
 
-#endif
 //=====================================================================================================
 // End of file
 //=====================================================================================================

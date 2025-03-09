@@ -20,22 +20,9 @@
 // SOFTWARE.
 ////////////////////////////////////////////////////////////////////////////////
 
-#ifndef AHRSMATH_H_
-#define AHRSMATH_H_
+#pragma once
 
-#include "IMUData.h"
 
-/**
- * Fast inverse square root algorithm from http://en.wikipedia.org/wiki/Fast_inverse_square_root
- *  @param x input data
- *  @return the result
- */
-float invSqrt(const float x);
+#include "imu_data.h"
 
-/**
- * Converts quaternion to Euler angles.
- *  @param[in/out] data the IMU data structure with quaternion and Euler angles.
- */
-void quatToAngles(IMUData& data);
-
-#endif /* AHRSMATH_H_ */
+void SimpleAHRSupdate(IMUData& data);
